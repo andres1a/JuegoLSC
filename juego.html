@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego LSC - Animales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Juego: Scramble the Word - Animales</h1>
+        <nav>
+            <button class="nav-button" onclick="location.href='index.html'">Inicio</button>
+            <button class="nav-button" onclick="location.href='repaso.html'">Repaso</button>
+        </nav>
+    </header>
+    <main>
+        <!-- Pantalla de reglas -->
+        <div id="rules">
+            <h2>Reglas del Juego</h2>
+            <p>Ordena las letras para formar la palabra correcta que representa la seña del animal.</p>
+            <p>Pasarás por todas las palabras de la categoría.</p>
+            <button onclick="startGame('animales')">Comenzar - Animales</button>
+        </div>
+
+        <!-- Pantalla de juego -->
+        <div id="game" class="hidden">
+            <h2 id="categoryTitle">Categoría: Animales</h2>
+            <p id="progress" class="progress-indicator"></p>
+            <div id="scramble"></div>
+            <div id="hint">
+                <h3>Pista:</h3>
+                <video id="hintVideo" controls></video>
+            </div>
+            <input type="text" id="answerInput" placeholder="Escribe la palabra aquí..." onkeypress="if(event.key === 'Enter') checkAnswer()">
+            <button onclick="checkAnswer()">Comprobar</button>
+            <div id="feedback"></div>
+        </div>
+
+        <!-- Pantalla de resultados -->
+        <div id="results" class="hidden">
+            <h2>¡Juego Completado!</h2>
+            <p id="resultMessage" class="result-message"></p>
+            
+            <div class="stats-container">
+                <div class="stat-box correct-box">
+                    <i class="fas fa-check-circle"></i>
+                    <p class="stat-label">Correctas</p>
+                    <p class="stat-number" id="correctCount">0</p>
+                </div>
+                
+                <div class="stat-box incorrect-box">
+                    <i class="fas fa-times-circle"></i>
+                    <p class="stat-label">Incorrectas</p>
+                    <p class="stat-number" id="incorrectCount">0</p>
+                </div>
+                
+                <div class="stat-box total-box">
+                    <i class="fas fa-list"></i>
+                    <p class="stat-label">Total</p>
+                    <p class="stat-number" id="totalCount">0</p>
+                </div>
+            </div>
+            
+            <div class="percentage-container">
+                <p class="percentage-label">Porcentaje de acierto:</p>
+                <p class="percentage-value"><span id="percentage">0</span>%</p>
+            </div>
+            
+            <div class="result-buttons">
+                <button class="result-button retry-button" onclick="restartGame()">
+                    <i class="fas fa-redo"></i>
+                    Intentar de Nuevo
+                </button>
+                <button class="result-button repaso-button" onclick="goToRepaso()">
+                    <i class="fas fa-book-open"></i>
+                    Ir a Repaso
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Integrantes:</p>
+        <h4>Andrés Solano, Mario Osorio, María Ariza, Valerie Castellano, Esteban Gamarra, Mariluz Navarro</h4>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
