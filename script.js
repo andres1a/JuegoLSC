@@ -3,7 +3,8 @@ let currentCategory = "";
 let usedWords = [];
 let correctAnswers = 0;
 let incorrectAnswers = 0;
-let hasAnswered = false; // Nueva variable para controlar si ya respondió
+let hasAnswered = false;
+let maxQuestions = 10; // Variable para controlar cuántas preguntas hacer
 
 // Diccionario de palabras con sus rutas de video
 const vocabulary = {
@@ -26,6 +27,11 @@ const vocabulary = {
     }
 };
 
+function selectGameMode(category, numQuestions) {
+    maxQuestions = numQuestions;
+    startGame(category);
+}
+
 function startGame(category) {
     currentCategory = category;
     usedWords = [];
@@ -33,17 +39,23 @@ function startGame(category) {
     incorrectAnswers = 0;
 
     document.getElementById("rules").classList.add("hidden");
+    document.getElementById("modeSelection").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
     document.getElementById("results").classList.add("hidden");
     document.getElementById("categoryTitle").textContent = `Categoría: ${category}`;
     loadNewWord();
 }
 
+function showModeSelection() {
+    document.getElementById("rules").classList.add("hidden");
+    document.getElementById("modeSelection").classList.remove("hidden");
+}
+
 function loadNewWord() {
     const words = Object.keys(vocabulary[currentCategory]);
 
-    // Verificar si ya se usaron todas las palabras
-    if (usedWords.length >= words.length) {
+    // Verificar si ya alcanzó el límite de preguntas
+    if (usedWords.length >= maxQuestions) {
         showResults();
         return;
     }
@@ -57,7 +69,7 @@ function loadNewWord() {
 
     currentWord = randomWord;
     usedWords.push(currentWord);
-    hasAnswered = false; // Resetear el estado de respuesta
+    hasAnswered = false;
 
     // Scramble the word
     const scrambledWord = currentWord.split("").sort(() => Math.random() - 0.5).join("");
@@ -81,13 +93,11 @@ function loadNewWord() {
 }
 
 function updateProgress() {
-    const words = Object.keys(vocabulary[currentCategory]);
     const progress = document.getElementById("progress");
-    progress.textContent = `Palabra ${usedWords.length} de ${words.length}`;
+    progress.textContent = `Palabra ${usedWords.length} de ${maxQuestions}`;
 }
 
 function checkAnswer() {
-    // Si ya respondió a esta pregunta, no hacer nada
     if (hasAnswered) {
         return;
     }
@@ -95,16 +105,14 @@ function checkAnswer() {
     const userAnswer = document.getElementById("answerInput").value.trim().toLowerCase();
     const feedback = document.getElementById("feedback");
 
-    // Validar que haya escrito algo
     if (userAnswer === "") {
         feedback.textContent = "Por favor, escribe una respuesta.";
         feedback.className = "warning";
         return;
     }
 
-    hasAnswered = true; // Marcar que ya respondió
+    hasAnswered = true;
 
-    // Deshabilitar el input y el botón después de responder
     document.getElementById("answerInput").disabled = true;
     document.querySelector("#game button").disabled = true;
 
@@ -118,18 +126,17 @@ function checkAnswer() {
         feedback.className = "incorrect";
     }
 
-    // Espera un momento antes de cargar la siguiente palabra
     setTimeout(() => {
         feedback.className = "";
         loadNewWord();
-    }, 3000); // 3 segundos para que pueda leer la respuesta correcta
+    }, 3000);
 }
 
 function showResults() {
     document.getElementById("game").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
 
-    const totalQuestions = Object.keys(vocabulary[currentCategory]).length;
+    const totalQuestions = maxQuestions;
     const percentage = Math.round((correctAnswers / totalQuestions) * 100);
 
     document.getElementById("correctCount").textContent = correctAnswers;
@@ -137,7 +144,6 @@ function showResults() {
     document.getElementById("totalCount").textContent = totalQuestions;
     document.getElementById("percentage").textContent = percentage;
 
-    // Mensaje personalizado según el resultado
     const resultMessage = document.getElementById("resultMessage");
     if (percentage === 100) {
         resultMessage.textContent = "¡Perfecto! ¡Excelente trabajo!";
@@ -155,9 +161,15 @@ function showResults() {
 }
 
 function restartGame() {
-    startGame(currentCategory);
+    document.getElementById("results").classList.add("hidden");
+    document.getElementById("modeSelection").classList.remove("hidden");
 }
 
 function goToRepaso() {
     location.href = 'repaso.html';
+}
+
+function goBack() {
+    document.getElementById("modeSelection").classList.add("hidden");
+    document.getElementById("rules").classList.remove("hidden");
 }

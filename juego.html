@@ -21,8 +21,35 @@
         <div id="rules">
             <h2>Reglas del Juego</h2>
             <p>Ordena las letras para formar la palabra correcta que representa la seña del animal.</p>
-            <p>Pasarás por todas las palabras de la categoría.</p>
-            <button onclick="startGame('animales')">Comenzar - Animales</button>
+            <p>Tendrás una sola oportunidad por palabra.</p>
+            <button onclick="showModeSelection()">Comenzar</button>
+        </div>
+
+        <!-- Pantalla de selección de modo -->
+        <div id="modeSelection" class="hidden">
+            <h2>Selecciona el Modo de Juego</h2>
+            <p>¿Cuántas señas quieres adivinar?</p>
+            
+            <div class="mode-buttons">
+                <button class="mode-button" onclick="selectGameMode('animales', 5)">
+                    <i class="fas fa-star"></i>
+                    <span class="mode-number">5</span>
+                    <span class="mode-label">Señas</span>
+                    <span class="mode-time">~2 minutos</span>
+                </button>
+                
+                <button class="mode-button" onclick="selectGameMode('animales', 10)">
+                    <i class="fas fa-fire"></i>
+                    <span class="mode-number">10</span>
+                    <span class="mode-label">Señas</span>
+                    <span class="mode-time">~4 minutos</span>
+                </button>
+            </div>
+            
+            <button class="back-button" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                Volver
+            </button>
         </div>
 
         <!-- Pantalla de juego -->
@@ -72,7 +99,7 @@
             <div class="result-buttons">
                 <button class="result-button retry-button" onclick="restartGame()">
                     <i class="fas fa-redo"></i>
-                    Intentar de Nuevo
+                    Jugar de Nuevo
                 </button>
                 <button class="result-button repaso-button" onclick="goToRepaso()">
                     <i class="fas fa-book-open"></i>
