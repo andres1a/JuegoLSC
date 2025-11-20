@@ -18,7 +18,11 @@ const vocabulary = {
         gorila: "Videos/Animales/Gorila.mp4",
         gusano: "Videos/Animales/Gusano.mp4",
         hipopótamo: "Videos/Animales/Hipopotamo.mp4",
-        hormiga: "Videos/Animales/Hormiga.mp4"
+        hormiga: "Videos/Animales/Hormiga.mp4",
+        burro: "Videos/Animales/Burro.mp4",
+        caballo: "Videos/Animales/Caballo.mp4",
+        cabra: "Videos/Animales/Cabra.mp4",
+        camello: "Videos/Animales/Camello.mp4"
     }
 };
 
