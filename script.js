@@ -27,7 +27,12 @@ const vocabulary = {
         cangrejo: "Videos/Animales/Cangrejo.mp4",
         canguro: "Videos/Animales/Canguro.mp4",
         caracol: "Videos/Animales/Caracol.mp4",
-        cerdo: "Videos/Animales/Cerdo.mp4"
+        cerdo: "Videos/Animales/Cerdo.mp4",
+        elefante: "Videos/Animales/Elefante.mp4",
+        gallina: "Videos/Animales/Gallina.mp4",
+        gallo: "Videos/Animales/Gallo.mp4",
+        gato: "Videos/Animales/Gato.mp4"
+
     }
 };
 
